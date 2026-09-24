@@ -18,6 +18,8 @@ services:
 
     ports:
       - "${SSH_PORT:-2222}:22"
+      - "4096:4096"
+      - "8082:4082"
 
     restart: unless-stopped
 
