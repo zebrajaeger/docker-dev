@@ -77,6 +77,7 @@ Beispiel:
 NVM_VERSION=v0.40.3
 NODE_VERSION=24
 JAVA_VERSION=17.0.16-sapmchn
+MAVEN_VERSION=3.9.16
 
 SSH_PUBLIC_KEY=C:/Users/<BENUTZER>/.ssh/docker-dev.pub
 SSH_PORT=2222
@@ -136,11 +137,13 @@ sdk env
 
 ### Maven
 
-Maven kann ebenfalls über SDKMAN! installiert werden:
+Standardmäßig installiert und aktiviert das Image Maven über SDKMAN!. `MAVEN_VERSION` legt die zu installierende SDKMAN!-Maven-Version fest.
 
-```bash
-sdk install maven
+```env
+MAVEN_VERSION=3.9.16
 ```
+
+Weitere Maven-Versionen sind mit `sdk list maven` verfügbar.
 
 ### SSH-Port
 

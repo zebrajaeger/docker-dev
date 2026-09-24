@@ -1,12 +1,14 @@
 ARG NVM_VERSION=v0.40.3
 ARG NODE_VERSION=24
 ARG JAVA_VERSION=17.0.16-sapmchn
+ARG MAVEN_VERSION=3.9.16
 
 FROM ubuntu:24.04
 
 ARG NVM_VERSION
 ARG NODE_VERSION
 ARG JAVA_VERSION
+ARG MAVEN_VERSION
 
 RUN apt-get update && apt-get install -y \
     sudo \
@@ -45,6 +47,8 @@ RUN curl -fsSL "https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/inst
 
 RUN curl -fsSL https://get.sdkman.io | bash \
     && bash -c 'source "$SDKMAN_DIR/bin/sdkman-init.sh" && sdk install java "$JAVA_VERSION"'
+
+RUN bash -c 'source "$SDKMAN_DIR/bin/sdkman-init.sh" && sdk install maven "$MAVEN_VERSION"'
 
 USER root
 
