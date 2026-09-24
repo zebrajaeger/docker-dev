@@ -76,7 +76,7 @@ Beispiel:
 ```env
 NVM_VERSION=v0.40.3
 NODE_VERSION=24
-JAVA_VERSION=17.0.16-sapmchn
+JAVA_VERSION=21.0.12+1-sapmchn
 MAVEN_VERSION=3.9.16
 
 SSH_PUBLIC_KEY=C:/Users/<BENUTZER>/.ssh/docker-dev.pub
@@ -107,10 +107,10 @@ NVM installiert daraus automatisch die passende aktuelle Version der angegebenen
 
 ### Java
 
-Standardmäßig installiert und aktiviert das Image SAPMachine 17 über SDKMAN!. `JAVA_VERSION` legt die zu installierende SDKMAN!-Java-Kennung fest.
+Standardmäßig installiert und aktiviert das Image SAPMachine 21 über SDKMAN!. `JAVA_VERSION` legt die zu installierende SDKMAN!-Java-Kennung fest.
 
 ```env
-JAVA_VERSION=17.0.16-sapmchn
+JAVA_VERSION=21.0.12+1-sapmchn
 ```
 
 Die verfügbaren Java-Distributionen und Versionen zeigt:
