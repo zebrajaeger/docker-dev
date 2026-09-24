@@ -6,7 +6,7 @@ services:
       args:
         NVM_VERSION: ${NVM_VERSION:-v0.40.3}
         NODE_VERSION: ${NODE_VERSION:-24}
-        JAVA_VERSION: ${JAVA_VERSION:-17}
+        JAVA_VERSION: ${JAVA_VERSION:-17.0.16-sapmchn}
 
     container_name: dev-environment
 

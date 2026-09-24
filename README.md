@@ -6,8 +6,7 @@ Unter Windows kann sie z. B. mit Rancher Desktop und der Container Engine **Moby
 Die Umgebung enthält unter anderem:
 
 - Ubuntu 24.04
-- SAPMachine JDK
-- Maven
+- SDKMAN!
 - Git
 - OpenSSH Client und Server
 - `sudo`
@@ -15,7 +14,7 @@ Die Umgebung enthält unter anderem:
 - Node.js
 - npm
 
-Die Versionen von Java, Node.js und NVM können über die `.env`-Datei konfiguriert werden.
+Die Versionen von Java, Node.js und NVM können über die `.env`-Datei konfiguriert werden. Java und Maven werden mit SDKMAN! verwaltet.
 
 ## Verzeichnisstruktur
 
@@ -77,7 +76,7 @@ Beispiel:
 ```env
 NVM_VERSION=v0.40.3
 NODE_VERSION=24
-JAVA_VERSION=17
+JAVA_VERSION=17.0.16-sapmchn
 
 SSH_PUBLIC_KEY=C:/Users/<BENUTZER>/.ssh/docker-dev.pub
 SSH_PORT=2222
@@ -107,18 +106,40 @@ NVM installiert daraus automatisch die passende aktuelle Version der angegebenen
 
 ### Java
 
-`JAVA_VERSION` legt die gewünschte SAPMachine-JDK-Version fest.
-
-Beispiel:
+Standardmäßig installiert und aktiviert das Image SAPMachine 17 über SDKMAN!. `JAVA_VERSION` legt die zu installierende SDKMAN!-Java-Kennung fest.
 
 ```env
-JAVA_VERSION=17
+JAVA_VERSION=17.0.16-sapmchn
 ```
 
-Für Java 21:
+Die verfügbaren Java-Distributionen und Versionen zeigt:
 
-```env
-JAVA_VERSION=21
+```bash
+sdk list java
+```
+
+Beispiel für die Installation und Auswahl einer Java-Version:
+
+```bash
+sdk install java 21.0.8-tem
+sdk default java 21.0.8-tem
+```
+
+Für ein einzelnes Projekt kann eine Java-Version über eine `.sdkmanrc` festgelegt werden:
+
+```bash
+cd /workspace/Mein-Projekt
+sdk env init
+# Die erzeugte .sdkmanrc bearbeiten, z. B.: java=21.0.8-tem
+sdk env
+```
+
+### Maven
+
+Maven kann ebenfalls über SDKMAN! installiert werden:
+
+```bash
+sdk install maven
 ```
 
 ### SSH-Port
@@ -241,7 +262,7 @@ docker compose logs -f dev
 Direkt über Docker:
 
 ```powershell
-docker compose exec dev bash
+docker compose exec --user developer dev bash
 ```
 
 Alternativ über SSH:
@@ -299,6 +320,13 @@ npm -v
 ```bash
 nvm current
 nvm alias
+```
+
+### SDKMAN!
+
+```bash
+sdk version
+sdk current
 ```
 
 ## Container stoppen

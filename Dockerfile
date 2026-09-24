@@ -1,6 +1,6 @@
 ARG NVM_VERSION=v0.40.3
 ARG NODE_VERSION=24
-ARG JAVA_VERSION=17
+ARG JAVA_VERSION=17.0.16-sapmchn
 
 FROM ubuntu:24.04
 
@@ -16,16 +16,8 @@ RUN apt-get update && apt-get install -y \
     curl \
     ca-certificates \
     gnupg \
-    maven \
-    && rm -rf /var/lib/apt/lists/*
-
-# SAPMachine
-RUN curl -fsSL https://dist.sapmachine.io/debian/sapmachine.key \
-      | gpg --dearmor -o /usr/share/keyrings/sapmachine.gpg \
-    && echo "deb [signed-by=/usr/share/keyrings/sapmachine.gpg] https://dist.sapmachine.io/debian/amd64/ /" \
-      > /etc/apt/sources.list.d/sapmachine.list \
-    && apt-get update \
-    && apt-get install -y "sapmachine-${JAVA_VERSION}-jdk" \
+    zip \
+    unzip \
     && rm -rf /var/lib/apt/lists/*
 
 RUN useradd -m -s /bin/bash developer \
@@ -39,9 +31,10 @@ RUN usermod -aG sudo developer \
     && chmod 440 /etc/sudoers.d/developer
 
 ENV NVM_DIR=/home/developer/.nvm
+ENV SDKMAN_DIR=/home/developer/.sdkman
 
-RUN mkdir -p "$NVM_DIR" \
-    && chown -R developer:developer "$NVM_DIR"
+RUN mkdir -p "$NVM_DIR" "$SDKMAN_DIR" \
+    && chown -R developer:developer "$NVM_DIR" "$SDKMAN_DIR"
 
 USER developer
 
@@ -49,6 +42,9 @@ RUN curl -fsSL "https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/inst
     && . "$NVM_DIR/nvm.sh" \
     && nvm install "$NODE_VERSION" \
     && nvm alias default "$NODE_VERSION"
+
+RUN curl -fsSL https://get.sdkman.io | bash \
+    && bash -c 'source "$SDKMAN_DIR/bin/sdkman-init.sh" && sdk install java "$JAVA_VERSION"'
 
 USER root
 
