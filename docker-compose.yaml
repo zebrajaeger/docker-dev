@@ -1,0 +1,24 @@
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NVM_VERSION: ${NVM_VERSION:-v0.40.3}
+        NODE_VERSION: ${NODE_VERSION:-24}
+        JAVA_VERSION: ${JAVA_VERSION:-17}
+
+    container_name: dev-environment
+
+    volumes:
+      - ..:/workspace
+      - dev-ssh:/home/developer/.ssh
+      - ${SSH_PUBLIC_KEY}:/ssh-host-key/authorized_key.pub:ro
+
+    ports:
+      - "${SSH_PORT:-2222}:22"
+
+    restart: unless-stopped
+
+volumes:
+  dev-ssh:
