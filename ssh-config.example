@@ -1,0 +1,6 @@
+Host d
+    HostName 127.0.0.1
+    Port 2222
+    User developer
+    IdentityFile ~/.ssh/docker-dev
+    IdentitiesOnly yes
