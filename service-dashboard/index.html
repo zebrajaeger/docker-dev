@@ -39,7 +39,9 @@
       }
 
       a {
-        display: block;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
         padding: 1.25rem;
         border: 1px solid #374151;
         border-radius: 0.5rem;
@@ -59,6 +61,18 @@
         margin-top: 0.5rem;
         color: #9ca3af;
       }
+
+      .icon {
+        flex: 0 0 auto;
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+
+      .icon path,
+      .icon rect,
+      .icon circle {
+        stroke: currentColor;
+      }
     </style>
   </head>
   <body>
@@ -66,11 +80,36 @@
       <h1>Entwicklungsdienste</h1>
       <p>Lokale Weboberflaechen und API-Endpunkte der Docker-Entwicklungsumgebung.</p>
       <ul>
-        <li><a data-port="4097" href="#">OpenCode<small>Weboberflaeche</small></a></li>
-        <li><a data-port="20128" href="#">OmniRoute<small>API-Endpunkt</small></a></li>
-        <li><a data-port="8082" href="#">DocGen<small>Dokumentationsgenerator</small></a></li>
-        <li><a data-port="7682" href="#">Codex<small>Webterminal, falls aktiviert</small></a></li>
-        <li><a data-port="7683" href="#">Claude Code<small>Webterminal, falls aktiviert</small></a></li>
+        <li>
+          <a data-port="4097" href="#" target="_blank" rel="noopener noreferrer">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" aria-hidden="true"><path d="m5 4 5 8-5 8M13 20h6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>OpenCode<small>Weboberflaeche</small></span>
+          </a>
+        </li>
+        <li>
+          <a data-port="20128" href="#" target="_blank" rel="noopener noreferrer">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="m9 8 6 4-6 4Z" stroke-linejoin="round"/></svg>
+            <span>OmniRoute<small>API-Endpunkt</small></span>
+          </a>
+        </li>
+        <li>
+          <a data-port="8082" href="#" target="_blank" rel="noopener noreferrer">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" aria-hidden="true"><path d="M5 3h10l4 4v14H5Z" stroke-linejoin="round"/><path d="M15 3v5h5M8 12h8M8 16h6" stroke-linecap="round"/></svg>
+            <span>DocGen<small>Dokumentationsgenerator</small></span>
+          </a>
+        </li>
+        <li>
+          <a data-port="7682" href="#" target="_blank" rel="noopener noreferrer">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 10 3 2-3 2M13 16h4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Codex<small>Webterminal, falls aktiviert</small></span>
+          </a>
+        </li>
+        <li>
+          <a data-port="7683" href="#" target="_blank" rel="noopener noreferrer">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 10 3 2-3 2M13 16h4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Claude Code<small>Webterminal, falls aktiviert</small></span>
+          </a>
+        </li>
       </ul>
     </main>
     <script>

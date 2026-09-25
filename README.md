@@ -1,5 +1,5 @@
 # Docker-Entwicklungsumgebung
-
+![img.png](doc/img.png)
 Dieses Projekt stellt eine einheitliche Entwicklungsumgebung auf Basis von Docker bereit.  
 Unter Windows kann sie z. B. mit Rancher Desktop und der Container Engine **Moby** verwendet werden.
 
