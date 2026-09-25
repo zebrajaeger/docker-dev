@@ -252,6 +252,8 @@ Remove-Item -Recurse -Force .config\omniroute
 
 Fehlende Konfigurationsverzeichnisse werden beim Start automatisch angelegt und dem Benutzer `developer` zugeordnet.
 
+Die versionierten Startvorlagen liegen unter `config-templates`. Beim ersten Containerstart wird die OpenCode-Vorlage nach `.config/opencode/opencode.json` kopiert. Bereits vorhandene Konfigurationen werden nicht überschrieben.
+
 ### OpenCode mit OmniRoute
 
 Die Beispielkonfiguration unter `.config/opencode/opencode.json` verbindet OpenCode automatisch mit dem lokalen, OpenAI-kompatiblen OmniRoute-Endpunkt. Sie verwendet das Modell `omniroute/auto`; OmniRoute wählt dafür selbst einen verfügbaren Anbieter aus.

@@ -24,6 +24,12 @@ for config_dir in "${CONFIG_DIRS[@]}"; do
     chown -R developer:developer "$config_dir"
 done
 
+if [ ! -f /home/developer/.config/opencode/opencode.json ]; then
+    echo "Initializing OpenCode configuration..."
+    cp /usr/local/share/config-templates/opencode/opencode.json /home/developer/.config/opencode/
+    chown developer:developer /home/developer/.config/opencode/opencode.json
+fi
+
 if [ ! -f "$AZURE_KEY" ]; then
     echo "Generating Azure DevOps SSH key..."
 

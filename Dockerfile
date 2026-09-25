@@ -65,6 +65,7 @@ RUN bash -c 'source "$SDKMAN_DIR/bin/sdkman-init.sh" && sdk install maven "$MAVE
 
 USER root
 
+COPY config-templates /usr/local/share/config-templates
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 
 RUN sed -i 's/\r$//' /usr/local/bin/entrypoint.sh \
