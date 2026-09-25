@@ -16,6 +16,11 @@ Die Umgebung enthält unter anderem:
 - NVM
 - Node.js
 - npm
+- omniroute
+- opencode-ai
+- codebase-memory-mcp
+- Codex CLI
+- Claude Code (native installation)
 
 Die Versionen von Java, Node.js und NVM können über die `.env`-Datei konfiguriert werden. Java und Maven werden mit SDKMAN! verwaltet.
 
@@ -237,6 +242,12 @@ Aus dem Verzeichnis `docker-dev`:
 
 ```powershell
 docker compose up -d --build
+```
+
+Die Konfigurationen und Anmeldedaten von OmniRoute, OpenCode, Codex und Claude Code liegen im lokalen, nicht versionierten Verzeichnis `.config`. Sie bleiben deshalb beim Neubau oder Ersetzen des Containers erhalten. Zum vollständigen Zurücksetzen das jeweilige lokale Verzeichnis löschen:
+
+```powershell
+Remove-Item -Recurse -Force .config\omniroute
 ```
 
 Für spätere Starts ohne Änderungen am Dockerfile genügt:

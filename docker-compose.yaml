@@ -12,16 +12,26 @@ services:
     container_name: dev-environment
 
     volumes:
-      - ..:/workspace
-      - dev-ssh:/home/developer/.ssh
       - ${SSH_PUBLIC_KEY}:/ssh-host-key/authorized_key.pub:ro
-      - ./opencode:/home/developer/.config/opencode:rw
+      - dev-ssh:/home/developer/.ssh
+      - ..:/workspace
+      - ./.config/omniroute:/home/developer/.omniroute:rw
+      - ./.config/opencode:/home/developer/.config/opencode:rw
+      - ./.config/codex:/home/developer/.codex:rw
+      - ./.config/claude:/home/developer/.claude:rw
 
     ports:
       - "${SSH_PORT:-2222}:22"
-      - "4096:4096"
-      - "7681:7681"
+      # DocGen
       - "8082:4082"
+      # OpenCode serve/web
+      - "4096:4096"
+      # ttyd ports
+      - "7681:7681"
+      - "7682:7682"
+      - "7683:7683"
+      # codebase-memory-mcp graph
+      - "9749:9749"
 
     restart: unless-stopped
 

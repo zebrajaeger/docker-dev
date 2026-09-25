@@ -37,6 +37,7 @@ RUN usermod -aG sudo developer \
 
 ENV NVM_DIR=/home/developer/.nvm
 ENV SDKMAN_DIR=/home/developer/.sdkman
+ENV PATH=/home/developer/.local/bin:${PATH}
 
 RUN mkdir -p "$NVM_DIR" "$SDKMAN_DIR" \
     && chown -R developer:developer "$NVM_DIR" "$SDKMAN_DIR"
@@ -46,7 +47,16 @@ USER developer
 RUN curl -fsSL "https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/install.sh" | bash \
     && . "$NVM_DIR/nvm.sh" \
     && nvm install "$NODE_VERSION" \
-    && nvm alias default "$NODE_VERSION"
+    && nvm alias default "$NODE_VERSION" \
+    && npm install --global \
+        codeburn \
+        omniroute \
+        opencode-ai \
+        codebase-memory-mcp \
+        @openai/codex
+
+# Claude Code's native installer is Anthropic's recommended installation method.
+RUN curl -fsSL https://claude.ai/install.sh | bash
 
 RUN curl -fsSL https://get.sdkman.io | bash \
     && bash -c 'source "$SDKMAN_DIR/bin/sdkman-init.sh" && sdk install java "$JAVA_VERSION"'
