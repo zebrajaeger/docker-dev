@@ -4,6 +4,11 @@ set -e
 SSH_DIR=/home/developer/.ssh
 AZURE_KEY="$SSH_DIR/azure"
 AUTHORIZED_KEYS="$SSH_DIR/authorized_keys"
+NVM_DIR=/home/developer/.nvm
+
+start_as_developer() {
+    sudo -u developer -H env NVM_DIR="$NVM_DIR" bash -c "$1" &
+}
 
 mkdir -p "$SSH_DIR"
 chmod 700 "$SSH_DIR"
@@ -37,6 +42,26 @@ if [ -f /ssh-host-key/authorized_key.pub ]; then
     cp /ssh-host-key/authorized_key.pub "$AUTHORIZED_KEYS"
     chmod 600 "$AUTHORIZED_KEYS"
     chown developer:developer "$AUTHORIZED_KEYS"
+fi
+
+if [ "$START_OMNIROUTE" = "true" ]; then
+    echo "Starting OmniRoute on port 20128..."
+    start_as_developer 'source "$NVM_DIR/nvm.sh" && exec omniroute serve'
+fi
+
+if [ "$START_OPENCODE" = "true" ]; then
+    echo "Starting OpenCode on port 4096..."
+    start_as_developer 'source "$NVM_DIR/nvm.sh" && exec opencode serve --hostname 0.0.0.0 --port 4096'
+fi
+
+if [ "$START_CODEX" = "true" ]; then
+    echo "Starting Codex terminal on port 7682..."
+    start_as_developer 'source "$NVM_DIR/nvm.sh" && exec ttyd -p 7682 bash -lc "source \"$NVM_DIR/nvm.sh\" && exec codex"'
+fi
+
+if [ "$START_CLAUDE" = "true" ]; then
+    echo "Starting Claude Code terminal on port 7683..."
+    start_as_developer 'exec ttyd -p 7683 bash -lc "exec claude"'
 fi
 
 echo

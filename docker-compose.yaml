@@ -22,6 +22,8 @@ services:
 
     ports:
       - "${SSH_PORT:-2222}:22"
+      # OmniRoute
+      - "20128:20128"
       # DocGen
       - "8082:4082"
       # OpenCode serve/web
@@ -32,6 +34,12 @@ services:
       - "7683:7683"
       # codebase-memory-mcp graph
       - "9749:9749"
+
+    environment:
+      START_OMNIROUTE: ${START_OMNIROUTE:-true}
+      START_OPENCODE: ${START_OPENCODE:-true}
+      START_CODEX: ${START_CODEX:-false}
+      START_CLAUDE: ${START_CLAUDE:-false}
 
     restart: unless-stopped
 

@@ -250,6 +250,42 @@ Die Konfigurationen und Anmeldedaten von OmniRoute, OpenCode, Codex und Claude C
 Remove-Item -Recurse -Force .config\omniroute
 ```
 
+### OpenCode mit OmniRoute
+
+Die Beispielkonfiguration unter `.config/opencode/opencode.json` verbindet OpenCode automatisch mit dem lokalen, OpenAI-kompatiblen OmniRoute-Endpunkt. Sie verwendet das Modell `omniroute/auto`; OmniRoute wählt dafür selbst einen verfügbaren Anbieter aus.
+
+Zuerst OmniRoute starten:
+
+```bash
+omniroute serve
+```
+
+Anschließend OpenCode starten:
+
+```bash
+opencode
+```
+
+Für die lokale Standardkonfiguration ist kein API-Key erforderlich: OmniRoute prüft API-Keys nur, wenn `REQUIRE_API_KEY=true` gesetzt ist. Der Platzhalterwert `local` erfüllt lediglich die Anforderung des OpenAI-kompatiblen OpenCode-Providers.
+
+## Dienste automatisch starten
+
+Die folgenden Variablen in `.env` steuern, welche Dienste beim Containerstart gestartet werden:
+
+```env
+START_OMNIROUTE=true
+START_OPENCODE=true
+START_CODEX=false
+START_CLAUDE=false
+```
+
+OmniRoute ist dann unter `http://localhost:20128` erreichbar und OpenCode unter `http://localhost:4096`. Codex und Claude Code sind interaktive Anwendungen; bei Aktivierung stellt `ttyd` sie als Webterminals bereit:
+
+- Codex: `http://localhost:7682`
+- Claude Code: `http://localhost:7683`
+
+Der reservierte Port `7681` bleibt für weitere `ttyd`-Terminals verfügbar.
+
 Für spätere Starts ohne Änderungen am Dockerfile genügt:
 
 ```powershell
