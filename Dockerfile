@@ -49,6 +49,7 @@ RUN curl -fsSL "https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/inst
     && nvm install "$NODE_VERSION" \
     && nvm alias default "$NODE_VERSION" \
     && npm install --global npm@latest \
+    && npm config set allow-scripts=codebase-memory-mcp,omniroute,opencode-ai,keytar,onnxruntime-node,tls-client-node,@parcel/watcher,@swc/core,protobufjs,koffi,esbuild --location=user \
     && npm install --global \
         codeburn \
         omniroute \
