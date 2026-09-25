@@ -12,7 +12,7 @@ services:
     container_name: dev-environment
 
     volumes:
-      - ${SSH_PUBLIC_KEY:-${USERPROFILE}/.ssh/docker-dev.pub}:/ssh-host-key/authorized_key.pub:ro
+      - ${USERPROFILE}/.ssh/docker-dev:/host-ssh/docker-dev
       - dev-ssh:/home/developer/.ssh
       - ..:/home/developer/ws
       - ./.config/omniroute:/home/developer/.omniroute

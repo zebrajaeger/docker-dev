@@ -26,9 +26,17 @@ rebuild.cmd
 ```
 
 ## SSH
-Für einen SSH Zugang zum Container muss ein SSH key hinterlegt werden.
-Typischerweise ungefähr so:
+Der SSH Key wird automatisch generiert und in `%USERPROFILE%\.ssh\docker-dev` abgelegt. Das Startskript legt `%USERPROFILE%\.ssh` und die SSH-Konfiguration bei Bedarf an.
 
-```powershell
-ssh-keygen -t ed25519 -f %USERPROFILE%\.ssh\docker-dev
+Die automatisch erstellte `%USERPROFILE%\.ssh\config` enthält:
+
 ```
+Host d
+    HostName 127.0.0.1
+    Port 2222
+    User developer
+    IdentityFile ~/.ssh/docker-dev
+    IdentitiesOnly yes
+```
+
+Dann kann per `ssh d` auf den Container zugegriffen werden.

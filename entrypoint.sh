@@ -4,6 +4,8 @@ set -e
 SSH_DIR=/home/developer/.ssh
 AZURE_KEY="$SSH_DIR/azure"
 AUTHORIZED_KEYS="$SSH_DIR/authorized_keys"
+HOST_KEY=/host-ssh/docker-dev
+HOST_PUBLIC_KEY=/host-ssh/docker-dev.pub
 NVM_DIR=/home/developer/.nvm
 CONFIG_DIRS=(
     /home/developer/.omniroute
@@ -55,11 +57,18 @@ EOF
 chmod 600 "$SSH_DIR/config"
 chown developer:developer "$SSH_DIR/config"
 
-if [ -f /ssh-host-key/authorized_key.pub ]; then
-    cp /ssh-host-key/authorized_key.pub "$AUTHORIZED_KEYS"
-    chmod 600 "$AUTHORIZED_KEYS"
-    chown developer:developer "$AUTHORIZED_KEYS"
+if [ ! -s "$HOST_KEY" ]; then
+    echo "Generating container SSH key on the host..."
+    ssh-keygen -t ed25519 -f "$HOST_KEY" -N ""
 fi
+
+if [ ! -s "$HOST_PUBLIC_KEY" ]; then
+    ssh-keygen -y -f "$HOST_KEY" > "$HOST_PUBLIC_KEY"
+fi
+
+cp "$HOST_PUBLIC_KEY" "$AUTHORIZED_KEYS"
+chmod 600 "$AUTHORIZED_KEYS"
+chown developer:developer "$AUTHORIZED_KEYS"
 
 if [ "$START_OMNIROUTE" = "true" ]; then
     echo "Starting OmniRoute on port 20128..."

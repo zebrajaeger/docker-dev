@@ -89,11 +89,9 @@ NODE_VERSION=24
 JAVA_VERSION=21.0.12+1-sapmchn
 MAVEN_VERSION=3.9.16
 
-SSH_PUBLIC_KEY=C:/Users/<BENUTZER>/.ssh/docker-dev.pub
 SSH_PORT=2222
 ```
 
-`SSH_PUBLIC_KEY` ist optional. Ohne Angabe verwendet Docker Compose standardmäßig `%USERPROFILE%\.ssh\docker-dev.pub`.
 
 ### NVM
 
@@ -167,15 +165,7 @@ SSH_PORT=2222
 
 ## SSH-Schlüssel für den Zugang zum Container
 
-Für den SSH-Zugang wird auf dem Windows-Host ein eigenes Schlüsselpaar empfohlen.
-
-Beispiel:
-
-```powershell
-ssh-keygen -t ed25519 -f $HOME\.ssh\docker-dev
-```
-
-Dadurch entstehen:
+Beim ersten Start erzeugt der Container das Zugangsschlüsselpaar automatisch im SSH-Verzeichnis des Windows-Benutzers:
 
 ```text
 C:\Users\<BENUTZER>\.ssh\docker-dev
@@ -184,13 +174,9 @@ C:\Users\<BENUTZER>\.ssh\docker-dev.pub
 
 Der private Schlüssel verbleibt ausschließlich auf dem Host.
 
-In `.env` wird nur der öffentliche Schlüssel angegeben:
+Die private Schlüsseldatei sollte nicht weitergegeben oder eingecheckt werden.
 
-```env
-SSH_PUBLIC_KEY=C:/Users/<BENUTZER>/.ssh/docker-dev.pub
-```
-
-Eine passende SSH-Konfiguration auf dem Host kann beispielsweise so aussehen:
+`rebuild.cmd` und `rebuild-force.cmd` legen `%USERPROFILE%\.ssh` sowie die benötigten Dateien bei Bedarf an. Die neue Konfiguration enthält den Alias `d`:
 
 ```sshconfig
 Host d
@@ -206,6 +192,8 @@ Danach genügt:
 ```powershell
 ssh d
 ```
+
+Der Container bindet nur die drei benötigten Dateien `docker-dev`, `docker-dev.pub` und `config` ein, nicht das gesamte Verzeichnis `%USERPROFILE%\.ssh`.
 
 ## Azure-DevOps-SSH-Schlüssel
 
