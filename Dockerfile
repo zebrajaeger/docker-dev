@@ -48,6 +48,7 @@ RUN curl -fsSL "https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/inst
     && . "$NVM_DIR/nvm.sh" \
     && nvm install "$NODE_VERSION" \
     && nvm alias default "$NODE_VERSION" \
+    && npm install --global npm@latest \
     && npm install --global \
         codeburn \
         omniroute \

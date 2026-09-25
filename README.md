@@ -22,6 +22,8 @@ Die Umgebung enthält unter anderem:
 - Codex CLI
 - Claude Code (native installation)
 
+Beim Image-Build wird npm nach der Node.js-Installation automatisch auf die aktuelle Version aktualisiert.
+
 Die Versionen von Java, Node.js und NVM können über die `.env`-Datei konfiguriert werden. Java und Maven werden mit SDKMAN! verwaltet.
 
 ## Verzeichnisstruktur
