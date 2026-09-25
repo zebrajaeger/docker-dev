@@ -5,6 +5,12 @@ SSH_DIR=/home/developer/.ssh
 AZURE_KEY="$SSH_DIR/azure"
 AUTHORIZED_KEYS="$SSH_DIR/authorized_keys"
 NVM_DIR=/home/developer/.nvm
+CONFIG_DIRS=(
+    /home/developer/.omniroute
+    /home/developer/.config/opencode
+    /home/developer/.codex
+    /home/developer/.claude
+)
 
 start_as_developer() {
     sudo -u developer -H env NVM_DIR="$NVM_DIR" bash -c "$1" &
@@ -12,6 +18,11 @@ start_as_developer() {
 
 mkdir -p "$SSH_DIR"
 chmod 700 "$SSH_DIR"
+
+for config_dir in "${CONFIG_DIRS[@]}"; do
+    mkdir -p "$config_dir"
+    chown -R developer:developer "$config_dir"
+done
 
 if [ ! -f "$AZURE_KEY" ]; then
     echo "Generating Azure DevOps SSH key..."

@@ -250,6 +250,8 @@ Die Konfigurationen und Anmeldedaten von OmniRoute, OpenCode, Codex und Claude C
 Remove-Item -Recurse -Force .config\omniroute
 ```
 
+Fehlende Konfigurationsverzeichnisse werden beim Start automatisch angelegt und dem Benutzer `developer` zugeordnet.
+
 ### OpenCode mit OmniRoute
 
 Die Beispielkonfiguration unter `.config/opencode/opencode.json` verbindet OpenCode automatisch mit dem lokalen, OpenAI-kompatiblen OmniRoute-Endpunkt. Sie verwendet das Modell `omniroute/auto`; OmniRoute wählt dafür selbst einen verfügbaren Anbieter aus.

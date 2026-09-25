@@ -15,10 +15,10 @@ services:
       - ${SSH_PUBLIC_KEY}:/ssh-host-key/authorized_key.pub:ro
       - dev-ssh:/home/developer/.ssh
       - ..:/workspace
-      - ./.config/omniroute:/home/developer/.omniroute:rw
-      - ./.config/opencode:/home/developer/.config/opencode:rw
-      - ./.config/codex:/home/developer/.codex:rw
-      - ./.config/claude:/home/developer/.claude:rw
+      - ./.config/omniroute:/home/developer/.omniroute
+      - ./.config/opencode:/home/developer/.config/opencode
+      - ./.config/codex:/home/developer/.codex
+      - ./.config/claude:/home/developer/.claude
 
     ports:
       - "${SSH_PORT:-2222}:22"
