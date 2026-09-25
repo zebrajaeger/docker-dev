@@ -80,6 +80,11 @@ if [ "$START_OPENCODE" = "true" ]; then
     start_as_developer 'source "$NVM_DIR/nvm.sh" && exec opencode serve --hostname 0.0.0.0 --port 4096'
 fi
 
+if [ "$START_DASHBOARD" = "true" ]; then
+    echo "Starting service dashboard on port 8080..."
+    start_as_developer 'source "$NVM_DIR/nvm.sh" && exec node /usr/local/share/service-dashboard/server.js'
+fi
+
 if [ "$START_CODEX" = "true" ]; then
     echo "Starting Codex terminal on port 7682..."
     start_as_developer 'source "$NVM_DIR/nvm.sh" && exec ttyd -p 7682 bash -lc "source \"$NVM_DIR/nvm.sh\" && exec codex"'

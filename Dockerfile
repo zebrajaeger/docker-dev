@@ -68,10 +68,12 @@ RUN bash -c 'source "$SDKMAN_DIR/bin/sdkman-init.sh" && sdk install maven "$MAVE
 USER root
 
 COPY config-templates /usr/local/share/config-templates
+COPY service-dashboard /usr/local/share/service-dashboard
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 
 RUN sed -i 's/\r$//' /usr/local/bin/entrypoint.sh \
-    && chmod +x /usr/local/bin/entrypoint.sh
+    && chmod +x /usr/local/bin/entrypoint.sh \
+    && chown -R developer:developer /usr/local/share/service-dashboard
 
 WORKDIR /workspace
 

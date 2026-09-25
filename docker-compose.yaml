@@ -28,6 +28,8 @@ services:
       - "8082:4082"
       # OpenCode serve/web
       - "4097:4096"
+      # Service dashboard
+      - "80:8080"
       # ttyd ports
       - "7681:7681"
       - "7682:7682"
@@ -38,6 +40,7 @@ services:
     environment:
       START_OMNIROUTE: ${START_OMNIROUTE:-true}
       START_OPENCODE: ${START_OPENCODE:-true}
+      START_DASHBOARD: ${START_DASHBOARD:-true}
       START_CODEX: ${START_CODEX:-false}
       START_CLAUDE: ${START_CLAUDE:-false}
 

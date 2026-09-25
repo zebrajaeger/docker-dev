@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Entwicklungsdienste</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: system-ui, sans-serif;
+        background: #111827;
+        color: #e5e7eb;
+      }
+
+      body {
+        margin: 0;
+        padding: 3rem 1.5rem;
+      }
+
+      main {
+        max-width: 44rem;
+        margin: auto;
+      }
+
+      h1 {
+        margin: 0;
+      }
+
+      p {
+        color: #9ca3af;
+      }
+
+      ul {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+        gap: 1rem;
+        padding: 0;
+        list-style: none;
+      }
+
+      a {
+        display: block;
+        padding: 1.25rem;
+        border: 1px solid #374151;
+        border-radius: 0.5rem;
+        background: #1f2937;
+        color: #f9fafb;
+        text-decoration: none;
+      }
+
+      a:hover,
+      a:focus-visible {
+        border-color: #60a5fa;
+        background: #273449;
+      }
+
+      small {
+        display: block;
+        margin-top: 0.5rem;
+        color: #9ca3af;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Entwicklungsdienste</h1>
+      <p>Lokale Weboberflaechen und API-Endpunkte der Docker-Entwicklungsumgebung.</p>
+      <ul>
+        <li><a data-port="4097" href="#">OpenCode<small>Weboberflaeche</small></a></li>
+        <li><a data-port="20128" href="#">OmniRoute<small>API-Endpunkt</small></a></li>
+        <li><a data-port="8082" href="#">DocGen<small>Dokumentationsgenerator</small></a></li>
+        <li><a data-port="7682" href="#">Codex<small>Webterminal, falls aktiviert</small></a></li>
+        <li><a data-port="7683" href="#">Claude Code<small>Webterminal, falls aktiviert</small></a></li>
+      </ul>
+    </main>
+    <script>
+      for (const link of document.querySelectorAll("a[data-port]")) {
+        link.href = `${window.location.protocol}//${window.location.hostname}:${link.dataset.port}`;
+      }
+    </script>
+  </body>
+</html>

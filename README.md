@@ -271,11 +271,14 @@ Die folgenden Variablen in `.env` steuern, welche Dienste beim Containerstart ge
 ```env
 START_OMNIROUTE=true
 START_OPENCODE=true
+START_DASHBOARD=true
 START_CODEX=false
 START_CLAUDE=false
 ```
 
-OmniRoute ist dann unter `http://localhost:20128` erreichbar und OpenCode unter `http://localhost:4096`. Codex und Claude Code sind interaktive Anwendungen; bei Aktivierung stellt `ttyd` sie als Webterminals bereit:
+Die Dienstübersicht ist unter `http://localhost` erreichbar. Sie verlinkt auf die von der Entwicklungsumgebung bereitgestellten Webdienste, damit deren Ports nicht separat nachgeschlagen werden müssen.
+
+OmniRoute ist dann unter `http://localhost:20128` erreichbar und OpenCode unter `http://localhost:4097`. Codex und Claude Code sind interaktive Anwendungen; bei Aktivierung stellt `ttyd` sie als Webterminals bereit:
 
 - Codex: `http://localhost:7682`
 - Claude Code: `http://localhost:7683`
