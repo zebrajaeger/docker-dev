@@ -93,6 +93,8 @@ SSH_PUBLIC_KEY=C:/Users/<BENUTZER>/.ssh/docker-dev.pub
 SSH_PORT=2222
 ```
 
+`SSH_PUBLIC_KEY` ist optional. Ohne Angabe verwendet Docker Compose standardmäßig `%USERPROFILE%\.ssh\docker-dev.pub`.
+
 ### NVM
 
 `NVM_VERSION` legt fest, welche Version von NVM installiert wird.
