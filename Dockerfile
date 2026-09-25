@@ -18,6 +18,9 @@ RUN apt-get update && apt-get install -y \
     curl \
     ca-certificates \
     gnupg \
+    btop \
+    mc \
+    ttyd \
     zip \
     unzip \
     && rm -rf /var/lib/apt/lists/*

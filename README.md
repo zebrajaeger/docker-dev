@@ -10,6 +10,9 @@ Die Umgebung enthält unter anderem:
 - Git
 - OpenSSH Client und Server
 - `sudo`
+- ttyd
+- btop
+- Midnight Commander (`mc`)
 - NVM
 - Node.js
 - npm
