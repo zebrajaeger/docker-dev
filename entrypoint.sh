@@ -5,7 +5,7 @@ SSH_DIR=/home/developer/.ssh
 AZURE_KEY="$SSH_DIR/azure"
 AUTHORIZED_KEYS="$SSH_DIR/authorized_keys"
 HOST_KEY=/host-ssh/docker-dev
-HOST_PUBLIC_KEY=/host-ssh/docker-dev.pub
+CONTAINER_HOST_KEY=/tmp/docker-dev-host-key
 NVM_DIR=/home/developer/.nvm
 CONFIG_DIRS=(
     /home/developer/.omniroute
@@ -59,14 +59,14 @@ chown developer:developer "$SSH_DIR/config"
 
 if [ ! -s "$HOST_KEY" ]; then
     echo "Generating container SSH key on the host..."
-    ssh-keygen -t ed25519 -f "$HOST_KEY" -N ""
+    printf 'y\n' | ssh-keygen -q -t ed25519 -f "$HOST_KEY" -N ""
 fi
 
-if [ ! -s "$HOST_PUBLIC_KEY" ]; then
-    ssh-keygen -y -f "$HOST_KEY" > "$HOST_PUBLIC_KEY"
-fi
-
-cp "$HOST_PUBLIC_KEY" "$AUTHORIZED_KEYS"
+# The Windows bind mount has permissive Unix mode bits, so derive the public
+# key from a protected temporary copy rather than loading it directly.
+install -m 600 "$HOST_KEY" "$CONTAINER_HOST_KEY"
+ssh-keygen -y -f "$CONTAINER_HOST_KEY" > "$AUTHORIZED_KEYS"
+rm -f "$CONTAINER_HOST_KEY"
 chmod 600 "$AUTHORIZED_KEYS"
 chown developer:developer "$AUTHORIZED_KEYS"
 

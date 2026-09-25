@@ -176,7 +176,7 @@ Der private Schlüssel verbleibt ausschließlich auf dem Host.
 
 Die private Schlüsseldatei sollte nicht weitergegeben oder eingecheckt werden.
 
-`rebuild.cmd` und `rebuild-force.cmd` legen `%USERPROFILE%\.ssh` sowie die benötigten Dateien bei Bedarf an. Die neue Konfiguration enthält den Alias `d`:
+`rebuild.cmd` und `rebuild-force.cmd` legen `%USERPROFILE%\.ssh` sowie eine leere Datei für den privaten Schlüssel bei Bedarf an. Beim ersten Containerstart wird das SSH-Schlüsselpaar darin erzeugt. Die neue Konfiguration enthält den Alias `d`:
 
 ```sshconfig
 Host d
@@ -193,7 +193,7 @@ Danach genügt:
 ssh d
 ```
 
-Der Container bindet nur die drei benötigten Dateien `docker-dev`, `docker-dev.pub` und `config` ein, nicht das gesamte Verzeichnis `%USERPROFILE%\.ssh`.
+Der Container bindet nur die private Schlüsseldatei `docker-dev` schreibbar ein, nicht das gesamte Verzeichnis `%USERPROFILE%\.ssh`. Der private Schlüssel verbleibt auf dem Host; der öffentliche Schlüssel wird im Container daraus abgeleitet.
 
 ## Azure-DevOps-SSH-Schlüssel
 
